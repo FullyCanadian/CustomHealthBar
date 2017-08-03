@@ -28,8 +28,6 @@ public class Main extends JavaPlugin {
         getScoreboardManager().objRegister();
 
 
-        Bukkit.getServer().getLogger().info(">>> " + getDescription().getName() + " V " + getDescription().getVersion() + " has been enabled <<<");
-
         // Creates default config if config doesn't exist
         if (!getConfigManager().configExists()) {
             getConfigManager().createDefaultConfig();
@@ -41,7 +39,7 @@ public class Main extends JavaPlugin {
 
         saveConfig();
 
-
+        Bukkit.getServer().getLogger().info(">>> " + getDescription().getName() + " V " + getDescription().getVersion() + " has been enabled <<<");
 
 
     }
