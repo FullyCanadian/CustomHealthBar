@@ -28,14 +28,12 @@ public class ScoreboardManager {
         board = manager.getNewScoreboard();
     }
 
-    public void setScoreboard() {
-        for(Player online : Bukkit.getOnlinePlayers()) {
-            if (healthEnabledWorlds.contains(online.getWorld().getName())) {
-                online.setScoreboard(board);
+    public void setScoreboard(Player p) {
+            if (healthEnabledWorlds.contains(p.getWorld().getName())) {
+                p.setScoreboard(board);
             } else {
-                online.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+                p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
             }
         }
     }
 
-}

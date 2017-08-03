@@ -3,8 +3,6 @@ package me.fullycanadian.playerhealthpworld;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-
 public class Main extends JavaPlugin {
 
     private static Main instance;
@@ -22,13 +20,8 @@ public class Main extends JavaPlugin {
         configManager = new ConfigManager();
 
 
-        // Runnable to update player health
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            public void run() {
-                getScoreboardManager().setScoreboard();
-            }
-        }, 0, 10);
-
+        // Registers events
+        getServer().getPluginManager().registerEvents(new Events(), this);
 
         // Initializes scoreboard
         getScoreboardManager().registerScoreBoard();
@@ -64,8 +57,8 @@ public class Main extends JavaPlugin {
         return instance;
     }
 
-    private ScoreboardManager getScoreboardManager() { return scoreboardManager; }
+    public ScoreboardManager getScoreboardManager() { return scoreboardManager; }
 
-    private ConfigManager getConfigManager() { return configManager; }
+    public ConfigManager getConfigManager() { return configManager; }
 
 }
