@@ -3,8 +3,6 @@ package me.fullycanadian.playerhealthpworld;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-
 public class Main extends JavaPlugin {
 
     private static Main instance;
