@@ -9,26 +9,22 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import static me.fullycanadian.playerhealthpworld.ConfigManager.healthEnabledWorlds;
 
-public class ScoreboardManager {
-    private Objective objective;
-
-    private org.bukkit.scoreboard.ScoreboardManager manager;
-
+    class ScoreboardManager {
     private Scoreboard board;
 
-    public void objRegister() {
-        objective = board.registerNewObjective("Health", "health");
-        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-        objective.setDisplayName(ChatColor.RED + "❤");
+    void objRegister() {
+        Objective obj = board.registerNewObjective("Health", "health");
+        obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        obj.setDisplayName(ChatColor.RED + "❤");
     }
 
 
-    public void registerScoreBoard() {
-        manager = Bukkit.getScoreboardManager();
+    void registerScoreBoard() {
+        org.bukkit.scoreboard.ScoreboardManager manager = Bukkit.getScoreboardManager();
         board = manager.getNewScoreboard();
     }
 
-    public void setScoreboard(Player p) {
+    void setScoreboard(Player p) {
             if (healthEnabledWorlds.contains(p.getWorld().getName())) {
                 p.setScoreboard(board);
             } else {

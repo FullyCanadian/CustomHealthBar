@@ -7,26 +7,24 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.io.File;
 import java.util.HashSet;
 
-public class ConfigManager {
+ class ConfigManager {
 
-    private FileConfiguration config;
+    private FileConfiguration config = Main.getInstance().getConfig();
 
-    public static HashSet<String> healthEnabledWorlds = new HashSet<>();
+    static HashSet<String> healthEnabledWorlds = new HashSet<>();
 
-    public void createDefaultConfig() {
-        Main.getInstance().getConfig().options().copyDefaults(true);
-        this.registerWorlds();
+    void createDefaultConfig() {
+        config.options().copyDefaults(true);
+        registerWorlds();
+
     }
 
-    public boolean configExists() {
-        if (!new File(Main.getInstance().getDataFolder(), "config.yml").exists()) {
-            return false;
-        } else { return true; }
+    boolean configExists() {
+        return new File(Main.getInstance().getDataFolder(), "config.yml").exists();
     }
 
 
-    public void getWorlds() {
-        config = Main.getInstance().getConfig();
+     void getWorlds() {
         for (String key : config.getConfigurationSection("worlds").getKeys(false)) {
             if (config.getBoolean("worlds." + key)) {
                 healthEnabledWorlds.add(key);
@@ -36,7 +34,7 @@ public class ConfigManager {
         }
 
 
-        public void registerWorlds() {
+        private void registerWorlds() {
         config = Main.getInstance().getConfig();
         for (World world : Bukkit.getServer().getWorlds()) {
             config.addDefault("worlds." + world.getName(), false);

@@ -13,6 +13,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         instance = this;
 
         // Instantiate managers
@@ -29,15 +30,13 @@ public class Main extends JavaPlugin {
 
 
         // Creates default config if config doesn't exist
-        if (!getConfigManager().configExists()) {
-            getConfigManager().createDefaultConfig();
+        if (!configManager.configExists()) {
+            configManager.createDefaultConfig();
+            saveDefaultConfig();
         }
-
 
         // Puts worlds into hashset
         getConfigManager().getWorlds();
-
-        saveConfig();
 
         Bukkit.getServer().getLogger().info(">>> " + getDescription().getName() + " V " + getDescription().getVersion() + " has been enabled <<<");
 
@@ -47,16 +46,15 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         Bukkit.getServer().getLogger().info(">>> " + getDescription().getName() + " V " + getDescription().getVersion() + " has been disabled <<<");
-        saveConfig();
     }
 
 
-    public static Main getInstance() {
+    static Main getInstance() {
         return instance;
     }
 
-    public ScoreboardManager getScoreboardManager() { return scoreboardManager; }
+    ScoreboardManager getScoreboardManager() { return scoreboardManager; }
 
-    public ConfigManager getConfigManager() { return configManager; }
+    private ConfigManager getConfigManager() { return configManager; }
 
 }
